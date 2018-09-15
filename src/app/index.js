@@ -38,7 +38,7 @@ class App extends React.Component {
                 <div className="boxWrapper">
                     {
                         colours.map(function(colour, index){
-                            return <Box key={index} colour={colour} answerColour={answerIndex} answerIndex={answerIndex}/>;
+                            return <Box key={index} colour={colour} answerColour={answerColour} answerIndex={answerIndex}/>;
                         })
                     }
                 </div>
