@@ -1,0 +1,15 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.rgbColour {
+    text-align: center;
+    font-size: 24px;
+}
+
+.boxWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
