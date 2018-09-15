@@ -25,9 +25,6 @@ class App extends React.Component {
         return `RGB(${genR}, ${genG}, ${genB})`;
     }
 
-    onBoxClick(){
-        console.log("hi");
-    }
 
     render(){
         var colours = this.generateColoursArray();
@@ -38,11 +35,10 @@ class App extends React.Component {
         return (
             <div>
                 <Home rgb={answerColour} />
-                <p>Answer Index: {answerIndex}</p>
                 <div className="boxWrapper">
                     {
                         colours.map(function(colour, index){
-                            return <Box key={index} colour={colour} answerColour={answerColour}/>;
+                            return <Box key={index} colour={colour} answerColour={answerIndex} answerIndex={answerIndex}/>;
                         })
                     }
                 </div>

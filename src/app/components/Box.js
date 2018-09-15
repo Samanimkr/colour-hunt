@@ -9,8 +9,9 @@ export class Box extends React.Component {
         if (this.props.colour == this.props.answerColour) {
             alert("You Win!");
         } else {
-            alert("You're Khara");
+            alert("You're Wrong. The answer was box number " + (this.props.answerIndex+1)+ ".");
         }
+        document.location.reload()
     }
 
     render() {
@@ -20,7 +21,8 @@ export class Box extends React.Component {
             minWidth: '33.333%',
             height: '150px',
             boxShadow: 'inset 0 0 2px #000000',
-            cursor: "pointer"
+            cursor: "pointer",
+            textAlign: "center"
         };
         return (
             <div className="box" style={boxStyle} onClick={this.isCorrect.bind(this)}></div>

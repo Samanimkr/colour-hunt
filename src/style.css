@@ -13,3 +13,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.box:hover {
+    opacity: 0.8;
+}
