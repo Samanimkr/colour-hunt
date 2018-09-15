@@ -9,27 +9,40 @@ class App extends React.Component {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
-    generateColours(){
+    generateColoursArray(){
         var genColours = [];
         var genR, genG, genB;
-        for (var i = 0; i < 12; i++) {
-            genR = this.getRandomNum(255);
-            genG = this.getRandomNum(255);
-            genB = this.getRandomNum(255);
-            genColours[i] = `rgb(${genR}, ${genG}, ${genB})`;
+        for (var i = 0; i < 9; i++) {
+            genColours[i] = this.generateColour();
         }
         return genColours;
     }
 
+    generateColour() {
+        var genR = this.getRandomNum(255);
+        var genG = this.getRandomNum(255);
+        var genB = this.getRandomNum(255);
+        return `RGB(${genR}, ${genG}, ${genB})`;
+    }
+
+    onBoxClick(){
+        console.log("hi");
+    }
+
     render(){
-        var colours = this.generateColours();
+        var colours = this.generateColoursArray();
+        var answerIndex = this.getRandomNum(9);
+        var answerColour = this.generateColour();
+        colours[answerIndex] = answerColour;
+
         return (
             <div>
-                <Home/>
+                <Home rgb={answerColour} />
+                <p>Answer Index: {answerIndex}</p>
                 <div className="boxWrapper">
                     {
                         colours.map(function(colour, index){
-                            return <Box key={index} colour={colour}/>;
+                            return <Box key={index} colour={colour} answerColour={answerColour}/>;
                         })
                     }
                 </div>

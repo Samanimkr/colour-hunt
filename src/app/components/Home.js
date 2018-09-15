@@ -4,7 +4,7 @@ export class Home extends React.Component {
     render() {
         return (
             <div>
-                <p className="rgbColour">RGB(255,255,255)</p>
+                <p className="rgbColour">{this.props.rgb}</p>
             </div>
         )
     }
