@@ -1,10 +1,17 @@
 import React from "react";
 import { render } from "react-dom";
 
-import { Home } from "./components/Home";
+import { Question } from "./components/Question";
 import { Box } from "./components/Box";
+import { DifficultySlider } from "./components/DifficultySlider";
 
 class App extends React.Component {
+    constructor(){
+      super();
+      this.answerIndex = this.getRandomNum(9);
+      this.answerColour = this.generateColour();
+    }
+
     getRandomNum(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
@@ -25,20 +32,28 @@ class App extends React.Component {
         return `RGB(${genR}, ${genG}, ${genB})`;
     }
 
+    onBoxClick(boxColour){
+      if (boxColour == this.answerColour) {
+          alert("You Win!");
+      } else {
+          alert("You're Wrong. The answer was box number " + (this.answerIndex+1)+ ".");
+      }
+      document.location.reload()
+    }
+
 
     render(){
         var colours = this.generateColoursArray();
-        var answerIndex = this.getRandomNum(9);
-        var answerColour = this.generateColour();
-        colours[answerIndex] = answerColour;
+        colours[this.answerIndex] = this.answerColour;
 
         return (
             <div>
-                <Home rgb={answerColour} />
+                <Question rgb={this.answerColour} />
+                <DifficultySlider  />
                 <div className="boxWrapper">
                     {
-                        colours.map(function(colour, index){
-                            return <Box key={index} colour={colour} answerColour={answerColour} answerIndex={answerIndex}/>;
+                        colours.map((colour, index) => {
+                            return <Box key={index} colour={colour} boxClicked={this.onBoxClick.bind(this)} />;
                         })
                     }
                 </div>

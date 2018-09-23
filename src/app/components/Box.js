@@ -5,15 +5,6 @@ export class Box extends React.Component {
         super(props);
     }
 
-    isCorrect(){
-        if (this.props.colour == this.props.answerColour) {
-            alert("You Win!");
-        } else {
-            alert("You're Wrong. The answer was box number " + (this.props.answerIndex+1)+ ".");
-        }
-        document.location.reload()
-    }
-
     render() {
         const boxStyle = {
             backgroundColor: this.props.colour,
@@ -25,7 +16,7 @@ export class Box extends React.Component {
             textAlign: "center"
         };
         return (
-            <div className="box" style={boxStyle} onClick={this.isCorrect.bind(this)}></div>
+            <div className="box" style={boxStyle} onClick={() => this.props.boxClicked(this.props.colour)}></div>
         )
     }
 }
