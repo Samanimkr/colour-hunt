@@ -8,8 +8,9 @@ import { DifficultySlider } from "./components/DifficultySlider";
 class App extends React.Component {
     constructor(){
       super();
-      this.answerIndex = this.getRandomNum(9);
-      this.answerColour = this.generateColour();
+      this.state = {
+        numOfBoxes: 9
+      }
     }
 
     getRandomNum(max) {
@@ -19,7 +20,8 @@ class App extends React.Component {
     generateColoursArray(){
         var genColours = [];
         var genR, genG, genB;
-        for (var i = 0; i < 9; i++) {
+        var numOfBoxes = this.state.numOfBoxes;
+        for (var i = 0; i < numOfBoxes; i++) {
             genColours[i] = this.generateColour();
         }
         return genColours;
@@ -38,18 +40,29 @@ class App extends React.Component {
       } else {
           alert("You're Wrong. The answer was box number " + (this.answerIndex+1)+ ".");
       }
-      document.location.reload()
+      this.forceUpdate();
     }
 
+    changeDifficulty(difficulty){
+      if (difficulty==1) {
+        this.setState({numOfBoxes: 3});
+      } else if (difficulty==2) {
+        this.setState({numOfBoxes: 6});
+      } else if (difficulty==3){
+        this.setState({numOfBoxes: 9});
+      }
+    }
 
     render(){
         var colours = this.generateColoursArray();
+        this.answerIndex = this.getRandomNum(this.state.numOfBoxes);
+        this.answerColour = this.generateColour();
         colours[this.answerIndex] = this.answerColour;
 
         return (
             <div>
                 <Question rgb={this.answerColour} />
-                <DifficultySlider  />
+                <DifficultySlider onInput={this.changeDifficulty.bind(this)}/>
                 <div className="boxWrapper">
                     {
                         colours.map((colour, index) => {
