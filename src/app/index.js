@@ -61,7 +61,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <Question rgb={this.answerColour} />
+                <Question rgbVal={this.answerColour} />
                 <DifficultySlider onInput={this.changeDifficulty.bind(this)}/>
                 <div className="boxWrapper">
                     {
